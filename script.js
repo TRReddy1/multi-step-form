@@ -31,43 +31,58 @@ function inputs(e) {
   }
 }
 
-var clickCount = 0;
 // next button
 var nextBtn = document.getElementsByClassName("next-btn");
 nextBtn[0].addEventListener("click", nextPage);
 
-function nextPage() {
+var clickCount = 0;
+
+function nextPage(e) {
+  e.preventDefault();
   if (clickCount === 0) {
-    // console.log(clickCount);
-    card1[0].style.display = "none";
     createCard2();
     clickCount++;
+    var one = document.getElementsByClassName("1");
+    one[0].style.backgroundColor = "transparent";
+    one[0].style.color = "white";
+
+    var two = document.getElementsByClassName("2");
+    two[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+    two[0].style.color = "hsl(213, 96%, 18%)";
   } else if (clickCount === 1) {
-    //console.log(clickCount);
-    document.getElementById("card2").style.display = "none";
+    var card2 = document.getElementById("card2");
+    outerCard[0].removeChild(card2);
     thirdPage();
     clickCount++;
+    var two = document.getElementsByClassName("2");
+    two[0].style.backgroundColor = "transparent";
+    two[0].style.color = "white";
+
+    var three = document.getElementsByClassName("3");
+    three[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+    three[0].style.color = "hsl(213, 96%, 18%)";
   } else if (clickCount === 2) {
-    document.getElementById("card3").style.display = "none";
+    var card3 = document.getElementById("card3");
+    outerCard[0].removeChild(card3);
     fourthPage();
     clickCount++;
+    var three = document.getElementsByClassName("3");
+    three[0].style.backgroundColor = "transparent";
+    three[0].style.color = "white";
+
+    var four = document.getElementsByClassName("4");
+    four[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+    four[0].style.color = "hsl(213, 96%, 18%)";
   } else if (clickCount === 3) {
-    document.getElementById("card4").style.display = "none";
     thankyouPage();
   }
 }
 
 function createCard2() {
   // show back-btn
+  card1[0].style.display = "none";
+
   document.getElementsByClassName("back-btn")[0].style.visibility = "visible";
-
-  var one = document.getElementsByClassName("1");
-  one[0].style.backgroundColor = "transparent";
-  one[0].style.color = "white";
-
-  var two = document.getElementsByClassName("2");
-  two[0].style.backgroundColor = "hsl(206, 94%, 87%)";
-  two[0].style.color = "hsl(213, 96%, 18%)";
 
   var card2 = document.createElement("div");
   card2.className = "card-body";
@@ -193,22 +208,62 @@ document
   .getElementsByClassName("back-btn")[0]
   .addEventListener("click", prevPage);
 
-function prevPage() {
-  clickCount--;
-  if (clickCount === 0) {
-    document.getElementById("card2").style.display = "none";
-    card1[0].style.display = "block";
-    clickCount = 0;
-  }
+function prevPage(e) {
+  e.preventDefault();
   if (clickCount === 1) {
-    document.getElementById("card3").style.display = "none";
-    document.getElementById("card2").style.display = "block";
+    var one = document.getElementsByClassName("1");
+    one[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+    one[0].style.color = "hsl(213, 96%, 18%)";
+
+    var two = document.getElementsByClassName("2");
+    two[0].style.backgroundColor = "transparent";
+    two[0].style.color = "white";
+
+    document.getElementById("card2").style.display = "none";
+    // document.getElementById("card3").style.display = "none";
+    // document.getElementById("card4").style.display = "none";
+    var card2 = document.getElementById("card2");
+    outerCard[0].removeChild(card2);
+    clickCount -= 1;
+    card1[0].style.display = "block";
   }
   if (clickCount === 2) {
-    document.getElementById("card4").style.display = "none";
+    var two = document.getElementsByClassName("2");
+    two[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+    two[0].style.color = "hsl(213, 96%, 18%)";
+
+    var three = document.getElementsByClassName("3");
+    three[0].style.backgroundColor = "transparent";
+    three[0].style.color = "white";
+
+    // document.getElementById("card3").style.display = "none";
+    // document.getElementById("card4").style.display = "none";
+    // card1[0].style.display = "none";
+    // document.getElementById("card2").style.display = "block";
+    var card3 = document.getElementById("card3");
+    outerCard[0].removeChild(card3);
+    clickCount -= 1;
+    createCard2();
+  }
+  if (clickCount === 3) {
+    var three = document.getElementsByClassName("3");
+    three[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+    three[0].style.color = "hsl(213, 96%, 18%)";
+
+    var four = document.getElementsByClassName("4");
+    four[0].style.backgroundColor = "transparent";
+    four[0].style.color = "white";
+
+    // document.getElementById("card4").style.display = "none";
+    // document.getElementById("card2").style.display = "none";
+    // card1[0].style.display = "none";
     var nextBtn = document.getElementsByClassName("next-btn");
     nextBtn[0].innerText = "Next Step";
-    document.getElementById("card3").style.display = "block";
+    var card4 = document.getElementById("card4");
+    outerCard[0].removeChild(card4);
+    // document.getElementById("card3").style.display = "block";
+    clickCount -= 1;
+    thirdPage();
   }
 }
 
@@ -277,13 +332,9 @@ function selectPlan(e) {
 }
 
 function thirdPage() {
-  var two = document.getElementsByClassName("2");
-  two[0].style.backgroundColor = "transparent";
-  two[0].style.color = "white";
+  // document.getElementById("card2").style.display = "none";
 
-  var three = document.getElementsByClassName("3");
-  three[0].style.backgroundColor = "hsl(206, 94%, 87%)";
-  three[0].style.color = "hsl(213, 96%, 18%)";
+  // clickCount += 1;
 
   var card3 = document.createElement("div");
   card3.className = "card-body";
@@ -401,13 +452,9 @@ function servicePlan(e) {
 }
 
 function fourthPage() {
-  var three = document.getElementsByClassName("3");
-  three[0].style.backgroundColor = "transparent";
-  three[0].style.color = "white";
+  // document.getElementById("card3").style.display = "none";
 
-  var four = document.getElementsByClassName("4");
-  four[0].style.backgroundColor = "hsl(206, 94%, 87%)";
-  four[0].style.color = "hsl(213, 96%, 18%)";
+  // clickCount += 1;
 
   var card4 = document.createElement("div");
   card4.className = "card-body";
@@ -516,6 +563,10 @@ function calculatedTotal(s) {
 }
 
 function thankyouPage() {
+  // document.getElementById("card4").style.display = "none";
+  var card4 = document.getElementById("card4");
+  outerCard[0].removeChild(card4);
+  // clickCount += 1;
   //HIDING FOOTER
   document.getElementsByClassName("foot")[0].style.visibility = "hidden";
   document.getElementsByClassName("back-btn")[0].style.visibility = "hidden";
