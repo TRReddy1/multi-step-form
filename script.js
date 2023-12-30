@@ -320,8 +320,6 @@ function selectPlan(e) {
 function thirdPage() {
   // document.getElementById("card2").style.display = "none";
 
-  // clickCount += 1;
-
   var card3 = document.createElement("div");
   card3.className = "card-body";
   card3.id = "card3";
