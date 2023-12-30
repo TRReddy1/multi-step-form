@@ -6,6 +6,10 @@ document.getElementsByClassName("back-btn")[0].style.visibility = "hidden";
 // card 1 dom
 var card1 = document.getElementsByClassName("card-body");
 
+var one = document.getElementsByClassName("1");
+one[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+one[0].style.color = "hsl(213, 96%, 18%)";
+
 card1[0].addEventListener("keyup", inputs);
 
 function inputs(e) {
@@ -47,12 +51,23 @@ function nextPage() {
     document.getElementById("card3").style.display = "none";
     fourthPage();
     clickCount++;
+  } else if (clickCount === 3) {
+    document.getElementById("card4").style.display = "none";
+    thankyouPage();
   }
 }
 
 function createCard2() {
   // show back-btn
   document.getElementsByClassName("back-btn")[0].style.visibility = "visible";
+
+  var one = document.getElementsByClassName("1");
+  one[0].style.backgroundColor = "transparent";
+  one[0].style.color = "white";
+
+  var two = document.getElementsByClassName("2");
+  two[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+  two[0].style.color = "hsl(213, 96%, 18%)";
 
   var card2 = document.createElement("div");
   card2.className = "card-body";
@@ -183,6 +198,17 @@ function prevPage() {
   if (clickCount === 0) {
     document.getElementById("card2").style.display = "none";
     card1[0].style.display = "block";
+    clickCount = 0;
+  }
+  if (clickCount === 1) {
+    document.getElementById("card3").style.display = "none";
+    document.getElementById("card2").style.display = "block";
+  }
+  if (clickCount === 2) {
+    document.getElementById("card4").style.display = "none";
+    var nextBtn = document.getElementsByClassName("next-btn");
+    nextBtn[0].innerText = "Next Step";
+    document.getElementById("card3").style.display = "block";
   }
 }
 
@@ -204,18 +230,7 @@ function switched(e) {
       year.style.display = "block";
     });
 
-    switchState = e.target.checked ? "yearly" : "monthly";
-    // yearly add on
-    // var yearlyAddOn = document.getElementsByClassName("yearlyService");
-    // console.log(yearlyAddOn);
-    // Array.from(yearlyAddOn).forEach((yearAddOn) => {
-    //   if (e.target.checked) {
-    //     yearAddOn.style.display = "block";
-    //   } else {
-    //     yearAddOn.style.display = "none";
-    //   }
-    // });
-    // console.log(monthly);
+    switchState = "yearly";
   } else {
     // console.log("monthly");
     var yearly = document.getElementsByClassName("yearly");
@@ -227,6 +242,7 @@ function switched(e) {
     Array.from(monthly).forEach((month) => {
       month.style.display = "block";
     });
+    switchState = "monthly";
   }
 }
 
@@ -234,12 +250,12 @@ function selectPlan(e) {
   var allPlans = document.getElementsByClassName(e.target.className);
 
   for (let i = 0; i < allPlans.length; i++) {
-    allPlans[i].style.borderColor = "blue";
+    allPlans[i].style.borderColor = "hsl(231, 11%, 63%)";
   }
 
   if (switchState === "monthly") {
     var target = e.target;
-    target.style.borderColor = "red";
+    target.style.borderColor = "hsl(243, 100%, 62%)";
     var name = target.getElementsByClassName("plan-title")[0].innerText;
     var price = target.getElementsByClassName("plan-price");
     var cost = price[0].innerText;
@@ -249,7 +265,7 @@ function selectPlan(e) {
     console.log(calObj);
   } else {
     var target = e.target;
-    target.style.borderColor = "red";
+    target.style.borderColor = "hsl(243, 100%, 62%)";
     var name = target.getElementsByClassName("plan-title")[0].innerText;
     var price = target.getElementsByClassName("yearly");
     var cost = price[0].innerText;
@@ -261,6 +277,14 @@ function selectPlan(e) {
 }
 
 function thirdPage() {
+  var two = document.getElementsByClassName("2");
+  two[0].style.backgroundColor = "transparent";
+  two[0].style.color = "white";
+
+  var three = document.getElementsByClassName("3");
+  three[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+  three[0].style.color = "hsl(213, 96%, 18%)";
+
   var card3 = document.createElement("div");
   card3.className = "card-body";
   card3.id = "card3";
@@ -362,9 +386,9 @@ function createSerivices(a, b, c, element) {
 function servicePlan(e) {
   var parent = e.target.parentNode.parentNode;
   if (e.target.checked) {
-    parent.style.borderColor = "red";
+    parent.style.borderColor = "hsl(243, 100%, 62%)";
   } else {
-    parent.style.borderColor = "blue";
+    parent.style.borderColor = "hsl(231, 11%, 63%)";
   }
   var serviceName = parent.getElementsByClassName("serviceTexts")[0].innerText;
   var serviceCost = parent.getElementsByClassName("service-price")[0].innerText;
@@ -377,6 +401,14 @@ function servicePlan(e) {
 }
 
 function fourthPage() {
+  var three = document.getElementsByClassName("3");
+  three[0].style.backgroundColor = "transparent";
+  three[0].style.color = "white";
+
+  var four = document.getElementsByClassName("4");
+  four[0].style.backgroundColor = "hsl(206, 94%, 87%)";
+  four[0].style.color = "hsl(213, 96%, 18%)";
+
   var card4 = document.createElement("div");
   card4.className = "card-body";
   card4.id = "card4";
@@ -394,6 +426,10 @@ function fourthPage() {
   calculation(card4);
 
   outerCard[0].appendChild(card4);
+
+  var nextBtn = document.getElementsByClassName("next-btn");
+  nextBtn[0].innerText = "confirm";
+  nextBtn[0].style.backgroundColor = "hsl(243, 100%, 62%)";
 }
 
 function calculation(ele) {
@@ -429,8 +465,9 @@ function calculation(ele) {
   var Addcalculation = document.createElement("div");
   Addcalculation.classList = "Addcalculation d-flex";
 
+  var totalStr = calObj.cost;
+
   Object.entries(calObj.services).forEach((services) => {
-    // console.log(services);
     var block = document.createElement("div");
     block.className = "block";
 
@@ -444,6 +481,8 @@ function calculation(ele) {
     block.appendChild(name);
     block.appendChild(cost);
 
+    totalStr += services[1];
+
     Addcalculation.appendChild(block);
   });
 
@@ -456,9 +495,49 @@ function calculation(ele) {
   totalDiv.innerText = "Total";
 
   var totalCost = document.createElement("div");
-  totalCost.innerText = "$25";
+  var val = calculatedTotal(totalStr);
+  var finalval = "+$" + val + "/" + (switchState === "yearly" ? "yr" : "mo");
+  totalCost.innerText = finalval;
   totaled.appendChild(totalDiv);
   totaled.appendChild(totalCost);
 
   ele.append(calculations, totaled);
+}
+
+function calculatedTotal(s) {
+  var totalVal = 0;
+  var noPlus = s.split("+");
+  noPlus.forEach((s) => {
+    var noSlash = s.split("/")[0];
+    var noDollar = noSlash.split("$")[1];
+    totalVal += parseInt(noDollar);
+  });
+  return totalVal;
+}
+
+function thankyouPage() {
+  //HIDING FOOTER
+  document.getElementsByClassName("foot")[0].style.visibility = "hidden";
+  document.getElementsByClassName("back-btn")[0].style.visibility = "hidden";
+
+  var thankyou = document.createElement("div");
+  thankyou.className = "card-body";
+  thankyou.id = "thank-you";
+
+  var img = document.createElement("img");
+  img.src = "./assets/images/icon-thank-you.svg";
+
+  var cardTitle = document.createElement("h5");
+  cardTitle.className = "thankyou-title";
+  cardTitle.innerText = "Thank you!";
+
+  var cardPara = document.createElement("p");
+  cardPara.innerText = `Thanks for confirming your subscription! We hope you have fun
+  using our platform. If you ever need support, please feel free to email us
+  at support@loremgaming.com.`;
+
+  thankyou.appendChild(img);
+  thankyou.appendChild(cardTitle);
+  thankyou.appendChild(cardPara);
+  outerCard[0].appendChild(thankyou);
 }

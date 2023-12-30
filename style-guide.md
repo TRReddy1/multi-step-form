@@ -70,8 +70,6 @@ The designs were created to the following widths:
 
        <!-- Step 5 start -->
 
-       Thank you! Thanks for confirming your subscription! We hope you have fun
-       using our platform. If you ever need support, please feel free to email us
-       at support@loremgaming.com.
+       Thank you!
 
        <!-- Step 5 end -->
