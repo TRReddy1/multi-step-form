@@ -224,6 +224,7 @@ function prevPage(e) {
     outerCard[0].removeChild(card2);
     clickCount -= 1;
     card1[0].style.display = "block";
+    document.getElementsByClassName("back-btn")[0].style.visibility = "hidden";
   }
   if (clickCount === 2) {
     var two = document.getElementsByClassName("2");
