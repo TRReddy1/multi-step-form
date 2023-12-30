@@ -128,6 +128,9 @@ body {
   padding-bottom: 0;
 }
 
+.plansAll {
+  margin-top: 1em;
+}
 .plan-title {
   margin: 0;
   /* padding: 0; */
@@ -268,4 +271,142 @@ body {
   background-color: transparent !important;
   color: var(--Cool-gray) !important;
   border: none;
+}
+
+.desk-img {
+  display: none;
+}
+
+.steps {
+  display: none;
+}
+
+@media (min-width: 1010px) {
+  .img-fluid {
+    display: none;
+  }
+
+  .desk-img {
+    display: block;
+    position: absolute;
+    height: 94%;
+    /* top: 17%;
+    bottom: 20%; */
+    margin-left: 1em;
+    margin-top: 1em;
+    object-fit: contain;
+    z-index: 5;
+  }
+
+  .numbers {
+    flex-direction: column;
+    z-index: 9;
+    top: 22%;
+    left: 23%;
+  }
+
+  .number {
+    margin-bottom: 1.2em;
+  }
+
+  .steps {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 22.4%;
+    left: 28%;
+    z-index: 9;
+  }
+
+  .step {
+    margin-bottom: 0.8em;
+    padding: 0;
+    color: var(--Cool-gray);
+  }
+
+  .mainStep {
+    color: white;
+  }
+
+  .card {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    right: 20%;
+    bottom: 15%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .foot {
+    position: absolute;
+    width: auto;
+    bottom: 17%;
+    right: 25%;
+    left: 44%;
+    z-index: 9;
+  }
+
+  .card-body {
+    z-index: 6;
+    margin-left: 20em;
+    padding-top: 3em;
+    padding-right: 4em;
+  }
+
+  .card-text {
+    width: 100%;
+  }
+
+  .back-btn {
+    visibility: hidden;
+  }
+
+  .plans {
+    display: flex;
+    flex-direction: row;
+    margin-left: -0.5em;
+    margin-bottom: 1em;
+  }
+
+  .arcade {
+    display: flex;
+    flex-direction: column;
+
+    width: 19em;
+  }
+
+  .plansAll {
+    margin-left: 1em;
+  }
+
+  .servicesMain {
+    margin-top: 3em;
+  }
+
+  #flexCheckDefault {
+    margin: 0em 0.8em;
+  }
+
+  .service-price {
+    margin-left: 3.9em;
+  }
+
+  .calculations {
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  #thank-you {
+    padding: 2em;
+    margin-top: 9em;
+    margin-left: 18em;
+    /* margin-bottom: 4em; */
+    padding-left: 1em;
+  }
+
+  #thank-you p {
+    width: 100%;
+  }
 }

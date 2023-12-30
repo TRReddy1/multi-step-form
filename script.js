@@ -174,7 +174,7 @@ function createPlan(imgSrc, name, price, yearPrice, offer, ele) {
   arcadeImg.className = "plan-imgs";
 
   var planFlex = document.createElement("div");
-  planFlex.classList = "d-flex plans";
+  planFlex.classList = "d-flex plansAll";
   planFlex.style.display = "flex";
   planFlex.style.flexDirection = "column";
 
@@ -220,8 +220,6 @@ function prevPage(e) {
     two[0].style.color = "white";
 
     document.getElementById("card2").style.display = "none";
-    // document.getElementById("card3").style.display = "none";
-    // document.getElementById("card4").style.display = "none";
     var card2 = document.getElementById("card2");
     outerCard[0].removeChild(card2);
     clickCount -= 1;
@@ -236,10 +234,6 @@ function prevPage(e) {
     three[0].style.backgroundColor = "transparent";
     three[0].style.color = "white";
 
-    // document.getElementById("card3").style.display = "none";
-    // document.getElementById("card4").style.display = "none";
-    // card1[0].style.display = "none";
-    // document.getElementById("card2").style.display = "block";
     var card3 = document.getElementById("card3");
     outerCard[0].removeChild(card3);
     clickCount -= 1;
@@ -254,14 +248,10 @@ function prevPage(e) {
     four[0].style.backgroundColor = "transparent";
     four[0].style.color = "white";
 
-    // document.getElementById("card4").style.display = "none";
-    // document.getElementById("card2").style.display = "none";
-    // card1[0].style.display = "none";
     var nextBtn = document.getElementsByClassName("next-btn");
     nextBtn[0].innerText = "Next Step";
     var card4 = document.getElementById("card4");
     outerCard[0].removeChild(card4);
-    // document.getElementById("card3").style.display = "block";
     clickCount -= 1;
     thirdPage();
   }
@@ -272,9 +262,7 @@ function prevPage(e) {
 var switchState = "monthly";
 
 function switched(e) {
-  // console.log(e.target.checked);
   if (e.target.checked) {
-    //  console.log("yearly");
     var monthly = document.getElementsByClassName("plan-price");
     Array.from(monthly).forEach((month) => {
       month.style.display = "none";
@@ -287,7 +275,6 @@ function switched(e) {
 
     switchState = "yearly";
   } else {
-    // console.log("monthly");
     var yearly = document.getElementsByClassName("yearly");
     Array.from(yearly).forEach((year) => {
       year.style.display = "none";
@@ -317,7 +304,6 @@ function selectPlan(e) {
     calObj["name"] = name;
     calObj["switchState"] = switchState;
     calObj["cost"] = cost;
-    console.log(calObj);
   } else {
     var target = e.target;
     target.style.borderColor = "hsl(243, 100%, 62%)";
@@ -327,7 +313,6 @@ function selectPlan(e) {
     calObj["name"] = name;
     calObj["switchState"] = switchState;
     calObj["cost"] = cost;
-    // console.log(calObj);
   }
 }
 
@@ -447,7 +432,6 @@ function servicePlan(e) {
     calObj["services"] = {};
   }
   calObj["services"][serviceName] = serviceCost;
-  console.log(calObj);
   // console.log(serviceName, serviceCost);
 }
 

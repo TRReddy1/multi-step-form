@@ -38,7 +38,6 @@ The designs were created to the following widths:
 
      <!-- Sidebar end -->
 
-  Step 1 Your info Step 2 Select plan Step 3 Add-ons Step 4 Summary
   <!-- Step 1 start -->
 
        <!-- Step 1 end -->
