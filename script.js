@@ -50,6 +50,11 @@ function nextPage(e) {
     two[0].style.backgroundColor = "hsl(206, 94%, 87%)";
     two[0].style.color = "hsl(213, 96%, 18%)";
   } else if (clickCount === 1) {
+    if (!selectedOrNot) {
+      alert("please select a plan");
+      return;
+    }
+
     var card2 = document.getElementById("card2");
     outerCard[0].removeChild(card2);
     thirdPage();
@@ -289,31 +294,71 @@ function switched(e) {
   }
 }
 
+var selectedOrNot = false;
+
 function selectPlan(e) {
   var allPlans = document.getElementsByClassName(e.target.className);
 
   for (let i = 0; i < allPlans.length; i++) {
     allPlans[i].style.borderColor = "hsl(231, 11%, 63%)";
+    allPlans[i].style.backgroundColor = "white";
   }
 
   if (switchState === "monthly") {
     var target = e.target;
-    target.style.borderColor = "hsl(243, 100%, 62%)";
+
+    selectedOrNot = true;
+    // target.style.borderColor = "hsl(243, 100%, 62%)";
     var name = target.getElementsByClassName("plan-title")[0].innerText;
     var price = target.getElementsByClassName("plan-price");
     var cost = price[0].innerText;
-    calObj["name"] = name;
-    calObj["switchState"] = switchState;
-    calObj["cost"] = cost;
+
+    if (calObj.name === name && calObj.switchState === switchState) {
+      // Deselect the plan if already selected
+      target.style.borderColor = "hsl(231, 11%, 63%)";
+      target.style.backgroundColor = "white";
+      calObj = {}; // Clear the calObj or perform appropriate actions
+    } else {
+      // Remove the previously selected plan
+      calObj = {};
+      // Select the new plan
+      target.style.backgroundColor = "hsl(206, 94%, 87%)";
+      target.style.borderColor = "hsl(243, 100%, 62%)";
+      calObj["name"] = name;
+      calObj["switchState"] = switchState;
+      calObj["cost"] = cost;
+    }
+
+    // calObj["name"] = name;
+    // calObj["switchState"] = switchState;
+    // calObj["cost"] = cost;
   } else {
     var target = e.target;
-    target.style.borderColor = "hsl(243, 100%, 62%)";
+    selectedOrNot = true;
+    // target.style.borderColor = "hsl(243, 100%, 62%)";
     var name = target.getElementsByClassName("plan-title")[0].innerText;
     var price = target.getElementsByClassName("yearly");
     var cost = price[0].innerText;
-    calObj["name"] = name;
-    calObj["switchState"] = switchState;
-    calObj["cost"] = cost;
+
+    if (calObj.name === name && calObj.switchState === switchState) {
+      // Deselect the plan if already selected
+      target.style.borderColor = "hsl(231, 11%, 63%)";
+      target.style.backgroundColor = "white";
+      calObj = {}; // Clear the calObj or perform appropriate actions
+    } else {
+      // Remove the previously selected plan
+      calObj = {};
+      // Select the new plan
+      target.style.backgroundColor = "hsl(206, 94%, 87%)";
+      target.style.borderColor = "hsl(243, 100%, 62%)";
+      calObj["name"] = name;
+      calObj["switchState"] = switchState;
+      calObj["cost"] = cost;
+    }
+
+    // calObj["name"] = name;
+    // calObj["switchState"] = switchState;
+    // calObj["cost"] = cost;
   }
 }
 
@@ -422,15 +467,23 @@ function servicePlan(e) {
   var parent = e.target.parentNode.parentNode;
   if (e.target.checked) {
     parent.style.borderColor = "hsl(243, 100%, 62%)";
+    parent.style.backgroundColor = "hsl(206, 94%, 87%)";
+    var serviceName =
+      parent.getElementsByClassName("serviceTexts")[0].innerText;
+    var serviceCost =
+      parent.getElementsByClassName("service-price")[0].innerText;
+    if (!calObj["services"]) {
+      calObj["services"] = {};
+    }
+    calObj["services"][serviceName] = serviceCost;
   } else {
     parent.style.borderColor = "hsl(231, 11%, 63%)";
+    parent.style.backgroundColor = "white";
+
+    var serviceName =
+      parent.getElementsByClassName("serviceTexts")[0].innerText;
+    delete calObj["services"][serviceName];
   }
-  var serviceName = parent.getElementsByClassName("serviceTexts")[0].innerText;
-  var serviceCost = parent.getElementsByClassName("service-price")[0].innerText;
-  if (!calObj["services"]) {
-    calObj["services"] = {};
-  }
-  calObj["services"][serviceName] = serviceCost;
   // console.log(serviceName, serviceCost);
 }
 
@@ -566,9 +619,7 @@ function thankyouPage() {
   cardTitle.innerText = "Thank you!";
 
   var cardPara = document.createElement("p");
-  cardPara.innerText = `Thanks for confirming your subscription! We hope you have fun
-  using our platform. If you ever need support, please feel free to email us
-  at support@loremgaming.com.`;
+  cardPara.innerText = `Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.`;
 
   thankyou.appendChild(img);
   thankyou.appendChild(cardTitle);
