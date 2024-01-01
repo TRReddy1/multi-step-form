@@ -12,22 +12,24 @@ one[0].style.color = "hsl(213, 96%, 18%)";
 
 card1[0].addEventListener("keyup", inputs);
 
-function inputs(e) {
-  //   var nameEntered;
-  //   var emailEntered;
-  //   var numberEntered;
+var nameEntered = false;
+var emailEntered = false;
+var numberEntered = false;
 
+function inputs(e) {
   if (e.target.id === "name") {
     console.log(`name : ${e.target.value}`);
-    // nameEntered = true;
+    nameEntered = true;
   }
 
   if (e.target.id === "email") {
     console.log(`email : ${e.target.value}`);
+    emailEntered = true;
   }
 
   if (e.target.id === "number") {
     console.log(`number : ${e.target.value}`);
+    numberEntered = true;
   }
 }
 
@@ -39,6 +41,12 @@ var clickCount = 0;
 
 function nextPage(e) {
   e.preventDefault();
+
+  if (!nameEntered || !emailEntered || !numberEntered) {
+    alert("please fill all details");
+    return;
+  }
+
   if (clickCount === 0) {
     createCard2();
     clickCount++;
