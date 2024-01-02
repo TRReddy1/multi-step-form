@@ -120,6 +120,10 @@ body {
   cursor: pointer;
 }
 
+.arcade:hover {
+  border-color: var(--Purplish-blue);
+}
+
 .plan-imgs {
   padding: 1em;
 }

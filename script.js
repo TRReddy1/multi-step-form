@@ -306,68 +306,72 @@ function switched(e) {
 var selectedOrNot = false;
 
 function selectPlan(e) {
-  var allPlans = document.getElementsByClassName(e.target.className);
-
-  for (let i = 0; i < allPlans.length; i++) {
-    allPlans[i].style.borderColor = "hsl(231, 11%, 63%)";
-    allPlans[i].style.backgroundColor = "white";
-  }
-
-  if (switchState === "monthly") {
-    var target = e.target;
-
-    selectedOrNot = true;
-    // target.style.borderColor = "hsl(243, 100%, 62%)";
-    var name = target.getElementsByClassName("plan-title")[0].innerText;
-    var price = target.getElementsByClassName("plan-price");
-    var cost = price[0].innerText;
-
-    if (calObj.name === name && calObj.switchState === switchState) {
-      // Deselect the plan if already selected
-      target.style.borderColor = "hsl(231, 11%, 63%)";
-      target.style.backgroundColor = "white";
-      calObj = {}; // Clear the calObj or perform appropriate actions
-    } else {
-      // Remove the previously selected plan
-      calObj = {};
-      // Select the new plan
-      target.style.backgroundColor = "hsl(206, 94%, 87%)";
-      target.style.borderColor = "hsl(243, 100%, 62%)";
-      calObj["name"] = name;
-      calObj["switchState"] = switchState;
-      calObj["cost"] = cost;
+  e.stopPropagation();
+  // console.log(allPlans);
+  var clicked = e.target;
+  if (clicked.classList.contains("arcade")) {
+    var allPlans = document.getElementsByClassName("arcade");
+    for (let i = 0; i < allPlans.length; i++) {
+      allPlans[i].style.borderColor = "hsl(231, 11%, 63%)";
+      allPlans[i].style.backgroundColor = "white";
     }
 
-    // calObj["name"] = name;
-    // calObj["switchState"] = switchState;
-    // calObj["cost"] = cost;
-  } else {
-    var target = e.target;
-    selectedOrNot = true;
-    // target.style.borderColor = "hsl(243, 100%, 62%)";
-    var name = target.getElementsByClassName("plan-title")[0].innerText;
-    var price = target.getElementsByClassName("yearly");
-    var cost = price[0].innerText;
+    if (switchState === "monthly") {
+      var target = e.target;
 
-    if (calObj.name === name && calObj.switchState === switchState) {
-      // Deselect the plan if already selected
-      target.style.borderColor = "hsl(231, 11%, 63%)";
-      target.style.backgroundColor = "white";
-      calObj = {}; // Clear the calObj or perform appropriate actions
+      selectedOrNot = true;
+      // target.style.borderColor = "hsl(243, 100%, 62%)";
+      var name = target.getElementsByClassName("plan-title")[0].innerText;
+      var price = target.getElementsByClassName("plan-price");
+      var cost = price[0].innerText;
+
+      if (calObj.name === name && calObj.switchState === switchState) {
+        // Deselect the plan if already selected
+        target.style.borderColor = "hsl(231, 11%, 63%)";
+        target.style.backgroundColor = "white";
+        calObj = {}; // Clear the calObj or perform appropriate actions
+      } else {
+        // Remove the previously selected plan
+        calObj = {};
+        // Select the new plan
+        target.style.backgroundColor = "hsl(206, 94%, 87%)";
+        target.style.borderColor = "hsl(243, 100%, 62%)";
+        calObj["name"] = name;
+        calObj["switchState"] = switchState;
+        calObj["cost"] = cost;
+      }
+
+      // calObj["name"] = name;
+      // calObj["switchState"] = switchState;
+      // calObj["cost"] = cost;
     } else {
-      // Remove the previously selected plan
-      calObj = {};
-      // Select the new plan
-      target.style.backgroundColor = "hsl(206, 94%, 87%)";
-      target.style.borderColor = "hsl(243, 100%, 62%)";
-      calObj["name"] = name;
-      calObj["switchState"] = switchState;
-      calObj["cost"] = cost;
-    }
+      var target = e.target;
+      selectedOrNot = true;
+      // target.style.borderColor = "hsl(243, 100%, 62%)";
+      var name = target.getElementsByClassName("plan-title")[0].innerText;
+      var price = target.getElementsByClassName("yearly");
+      var cost = price[0].innerText;
 
-    // calObj["name"] = name;
-    // calObj["switchState"] = switchState;
-    // calObj["cost"] = cost;
+      if (calObj.name === name && calObj.switchState === switchState) {
+        // Deselect the plan if already selected
+        target.style.borderColor = "hsl(231, 11%, 63%)";
+        target.style.backgroundColor = "white";
+        calObj = {}; // Clear the calObj or perform appropriate actions
+      } else {
+        // Remove the previously selected plan
+        calObj = {};
+        // Select the new plan
+        target.style.backgroundColor = "hsl(206, 94%, 87%)";
+        target.style.borderColor = "hsl(243, 100%, 62%)";
+        calObj["name"] = name;
+        calObj["switchState"] = switchState;
+        calObj["cost"] = cost;
+      }
+
+      // calObj["name"] = name;
+      // calObj["switchState"] = switchState;
+      // calObj["cost"] = cost;
+    }
   }
 }
 
@@ -560,29 +564,6 @@ function calculation(ele) {
   var Addcalculation = document.createElement("div");
   Addcalculation.classList = "Addcalculation d-flex";
 
-  var totalStr = calObj.cost;
-
-  Object.entries(calObj.services).forEach((services) => {
-    var block = document.createElement("div");
-    block.className = "block";
-
-    var name = document.createElement("div");
-    name.className = "nameService";
-    name.innerText = services[0];
-
-    var cost = document.createElement("div");
-    cost.innerText = services[1];
-
-    block.appendChild(name);
-    block.appendChild(cost);
-
-    totalStr += services[1];
-
-    Addcalculation.appendChild(block);
-  });
-
-  calculations.appendChild(Addcalculation);
-
   var totaled = document.createElement("div");
   totaled.className = "totaled";
 
@@ -591,9 +572,37 @@ function calculation(ele) {
 
   var totalCost = document.createElement("div");
   totalCost.style.color = "hsl(243, 100%, 62%)";
-  var val = calculatedTotal(totalStr);
-  var finalval = "+$" + val + "/" + (switchState === "yearly" ? "yr" : "mo");
-  totalCost.innerText = finalval;
+
+  if (!calObj.services || Object.entries(calObj.services).length === 0) {
+    totalCost.innerText = calObj.cost;
+  } else {
+    var totalStr = calObj.cost;
+    Object.entries(calObj.services).forEach((services) => {
+      var block = document.createElement("div");
+      block.className = "block";
+
+      var name = document.createElement("div");
+      name.className = "nameService";
+      name.innerText = services[0];
+
+      var cost = document.createElement("div");
+      cost.innerText = services[1];
+
+      block.appendChild(name);
+      block.appendChild(cost);
+
+      totalStr += services[1];
+
+      calculations.appendChild(block);
+    });
+
+    // calculations.appendChild(Addcalculation);
+
+    var val = calculatedTotal(totalStr);
+    var finalval = "+$" + val + "/" + (switchState === "yearly" ? "yr" : "mo");
+    totalCost.innerText = finalval;
+  }
+
   totaled.appendChild(totalDiv);
   totaled.appendChild(totalCost);
 
