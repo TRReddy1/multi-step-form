@@ -102,10 +102,11 @@ function createCard2() {
   card2.id = "card2";
 
   var cardTitle = document.createElement("h5");
-  cardTitle.className = "class-title";
+  cardTitle.classList = "class-title plans-title";
   cardTitle.innerText = "Select your plan";
 
   var cardPara = document.createElement("p");
+  cardPara.className = "plans-para";
   cardPara.innerText = "You have the option of monthly or yearly billing.";
 
   card2.appendChild(cardTitle);
@@ -464,6 +465,7 @@ function createSerivices(a, b, c, element) {
 
   var servicePrice = document.createElement("p");
   servicePrice.className = "service-price";
+  servicePrice.style.color = "hsl(243, 100%, 62%)";
   servicePrice.innerText = c;
 
   services.append(serviceFlex, servicePrice);
@@ -586,6 +588,7 @@ function calculation(ele) {
   totalDiv.innerText = "Total";
 
   var totalCost = document.createElement("div");
+  totalCost.style.color = "hsl(243, 100%, 62%)";
   var val = calculatedTotal(totalStr);
   var finalval = "+$" + val + "/" + (switchState === "yearly" ? "yr" : "mo");
   totalCost.innerText = finalval;

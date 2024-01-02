@@ -117,6 +117,7 @@ body {
   border-radius: 10px;
   border-color: var(--Cool-gray);
   align-items: start;
+  cursor: pointer;
 }
 
 .plan-imgs {
