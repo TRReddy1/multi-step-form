@@ -330,6 +330,8 @@ function selectPlan(e) {
         target.style.borderColor = "hsl(231, 11%, 63%)";
         target.style.backgroundColor = "white";
         calObj = {}; // Clear the calObj or perform appropriate actions
+
+        selectedOrNot = false;
       } else {
         // Remove the previously selected plan
         calObj = {};
@@ -357,6 +359,7 @@ function selectPlan(e) {
         target.style.borderColor = "hsl(231, 11%, 63%)";
         target.style.backgroundColor = "white";
         calObj = {}; // Clear the calObj or perform appropriate actions
+        selectedOrNot = false;
       } else {
         // Remove the previously selected plan
         calObj = {};
