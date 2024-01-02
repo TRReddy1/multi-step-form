@@ -543,6 +543,8 @@ function calculation(ele) {
 
   var changePara = document.createElement("div");
   changePara.innerText = "change";
+  changePara.style.textDecoration = "underline";
+  changePara.style.cursor = "pointer";
 
   var totalPlan = document.createElement("div");
   totalPlan.innerText = calObj.cost;
